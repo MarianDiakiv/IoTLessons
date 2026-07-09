@@ -1,0 +1,32 @@
+name: IoTLessonsArduinoBuild
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Clone Repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Compile By Arduino CLI Action
+      - name: Compile Arduino Sketch
+        uses: arduino/compile-sketches@v1
+        with:
+          # 
+          fqbn: "arduino:avr:nano"
+          
+          # Шлях до вашого скетчу (.ino файлу або папки з ним)
+          # Якщо файл лежить в коліні репозиторію, можна залишити "." або "./"
+          sketch-paths: "/Lesson2HomeTask/sketch_jul7b"
+          
+          # Extended libraries if they used in app
+          # libraries: |
+          #   - name: "DHT sensor library"
+          #   - name: "Adafruit Unified Sensor"
