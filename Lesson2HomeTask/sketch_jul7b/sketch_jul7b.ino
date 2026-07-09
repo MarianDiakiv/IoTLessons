@@ -84,6 +84,6 @@ void caseTwo(){
 void loop()
 {
 // please uncomment one method and comment another
-  caseOne();
+  //caseOne();
   caseTwo();
 }
