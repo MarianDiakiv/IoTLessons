@@ -15,26 +15,28 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # Створюємо папку для білду вручну, щоб уникнути проблем із правами доступу
+      - name: Create Build Directory
+        run: mkdir -p ./build_output
+
       # Compile By Arduino CLI Action
       - name: Compile Arduino Sketch
         uses: arduino/compile-sketches@v1
         with:
-          # (Arduino Nano)
+          # Ідентифікатор плати
           fqbn: "arduino:avr:nano"
           
           # Path for Ino File
           sketch-paths: "./Lesson2HomeTask/sketch_jul7b"
 
-          # path for save bin file
-          cli-compile-flags: |
-            - --output-dir
-            - ./build_output
+          # Використовуємо вбудовану змінну екшену для перевизначення папки білду
+          enable-build-properties-temporary-workaround: true
+          cli-compile-flags: "--output-dir=./build_output"
           
-      # Build Step
+      # Upload Build Artifacts
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
         with:
-          # Name of archive
           name: arduinoBuilds
-          # The folder whose contents will be packed into the archive
-          path: ./build_output/
+          # Вказуємо шлях до папки (екшн підхопить усе всередині неї)
+          path: build_output/
