@@ -19,21 +19,22 @@ jobs:
       - name: Compile Arduino Sketch
         uses: arduino/compile-sketches@v1
         with:
-          # 
+          # (Arduino Nano)
           fqbn: "arduino:avr:nano"
           
           # Path for Ino File
           sketch-paths: "./Lesson2HomeTask/sketch_jul7b"
 
-	# path for save bin file
+          # path for save bin file
           cli-compile-flags: |
             - --output-dir
             - ./build_output
           
-          name: Upload Build Artifacts
-          uses: actions/upload-artifact@v4
-          with:
+      # Build Step
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
           # Name of archive
-           name: arduinoBuilds
-          # The folder whose contents will be packed into the archive (should match --output-dir above)
-           path: ./build_output/
+          name: arduinoBuilds
+          # The folder whose contents will be packed into the archive
+          path: ./build_output/
