@@ -8,9 +8,9 @@ const int buttonPin=2;
 
 int buttonCurrentState=0;
 int buttonLastState = 0;
-int buttonPressCount=0;
+volatile int buttonPressCount=0;
 // for case 2 
-bool ledWord = true;
+volatile bool ledWord = true;
 
 void setup()
 {
