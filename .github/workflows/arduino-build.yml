@@ -24,8 +24,16 @@ jobs:
           
           # Path for Ino File
           sketch-paths: "./Lesson2HomeTask/sketch_jul7b"
+
+	# path for save bin file
+          cli-compile-flags: |
+            - --output-dir
+            - ./build_output
           
-          # Extended libraries if they used in app
-          # libraries: |
-          #   - name: "DHT sensor library"
-          #   - name: "Adafruit Unified Sensor"
+          name: Upload Build Artifacts
+          uses: actions/upload-artifact@v4
+          with:
+          # Name of archive
+           name: arduinoBuilds
+          # The folder whose contents will be packed into the archive (should match --output-dir above)
+           path: ./build_output/
